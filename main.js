@@ -2,6 +2,8 @@ const puppeteer = require('puppeteer')
 const fs = require('fs')
 const { syncBuiltinESMExports } = require('module')
 let count = 0
+const emoji =  ["😍","❤","💕","😘","😎","💦","😛","❤","😍","😊","😘","😘","😎","💦","😛","❤","😊","💕","😘","😎","💦","😛"]
+const commentOrigin = ["Hello, tell me, am i beautiful?","Hi, tell me, am i hot?","Hello, tell me, am i pretty?","Hi, tell me, am i pretty?","Hi, rate me pls"]
 
 const loadCookies = async (page) => {
   if (fs.existsSync('cookies.json')) {
@@ -17,6 +19,16 @@ const loadCookies = async (page) => {
   }
 }
 
+const randomEmoji = async  () => {
+  let result = ''
+  let i = Math.floor(Math.random() * 3)
+  while (i < 4) {
+    result += emoji[Math.floor(Math.random() * emoji.length)]
+    i+=1
+  }
+  return result
+}
+
 const sleep = (delay) => {
   var start = new Date().getTime()
   while (new Date().getTime() < start + delay);
@@ -26,7 +38,7 @@ const comment = async (page) => {
   console.log('---COMMENTING---')
   await page.waitForSelector('.DraftEditor-root')
   await page.click('.DraftEditor-root')
-  await page.keyboard.type('😍😍😍Hello, tell me, am i beautiful?😍😍')
+  await page.keyboard.type(await randomEmoji() + commentOrigin[Math.floor(Math.random() * commentOrigin.length)] + await randomEmoji())
   await page.waitForSelector('.tiktok-1w3780e-DivPostButton', { clickable: true })
   await page.click('.tiktok-1w3780e-DivPostButton')
   await page.waitForSelector('.css-1commy4-DivMessageContainer')
@@ -36,7 +48,7 @@ const comment = async (page) => {
     'div.tiktok-16r0vzi-DivCommentItemContainer:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(2) > div:nth-child(1)'
   )
 
-  sleep(3000)
+  sleep(4000)
   count = count + 1
   console.log(`---COMMENTS COUNT - ${count} ---`)
 }
@@ -55,7 +67,7 @@ const comment = async (page) => {
   await page.setDefaultTimeout(200000)
   await loadCookies(page)
   await page.screenshot({ path: 'screenshots/page.png' })
-  console.log('Opening follow page')
+  console.log('Opening following page')
   await page.click('.tiktok-1inll25-DivMainNavContainer > div:nth-child(2) > a:nth-child(1)')
   await page.waitForSelector(
     'div.tiktok-1p48f7x-DivItemContainer:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) '
