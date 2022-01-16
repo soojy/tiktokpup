@@ -3,7 +3,7 @@ const fs = require('fs')
 const { syncBuiltinESMExports } = require('module')
 let count = 0
 const emoji =  ["😍","❤","💕","😘","😎","💦","😛","❤","😍","😊","😘","😘","😎","💦","😛","❤","😊","💕","😘","😎","💦","😛"]
-const commentOrigin = ["Hello, tell me, am i beautiful?","Hi, tell me, am i hot?","Hello, tell me, am i pretty?","Hi, tell me, am i pretty?","Hi, rate me pls"]
+const commentOrigin = ["Hello, tell me, am i beautiful?","Hi, tell me, am i hot?","Hello, tell me, am i pretty?","Hi, tell me, am i pretty?","Hi, rate me pls" ,"Are you boy's here?"]
 
 const loadCookies = async (page) => {
   if (fs.existsSync('cookies.json')) {
@@ -76,7 +76,7 @@ const comment = async (page) => {
     'div.tiktok-1p48f7x-DivItemContainer:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) '
   )
 
-  while (count < 50) {
+  while (count < 120) {
     sleep(8000)
     await page.waitForSelector('.tiktok-6hn0mp-SpanOtherInfos > span:nth-child(2)')
     const element = await page.$('.tiktok-6hn0mp-SpanOtherInfos > span:nth-child(2)')
