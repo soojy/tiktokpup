@@ -1,11 +1,11 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer')
 const fs = require('fs')
 
 const loadCookies = async (page) => {
     if (fs.existsSync('cookies.json')) {
         console.log('Cookies found');
         console.log('Loading cookies...');
-        const cookiesString = await fs.readFile('./cookies.json');
+        const cookiesString = await fs.readFileSync('./cookies.json');
         const cookies = JSON.parse(cookiesString);
         await page.setCookie(...cookies);
         console.log('Cookies loaded');
@@ -17,13 +17,15 @@ const loadCookies = async (page) => {
 
 const login = async (page) => {
     console.log('Wait for login...');
-    await page.click('#app > div.tiktok-12azhi0-DivHeaderContainer.e10win0d0 > div > div.tiktok-149t8v1-DivHeaderRightContainer.e13wiwn60 > button')
-    await page.click('#root > div > div.tiktok-web-body-33PDi.tiktok-web-body-modal-2N5Wt > div > div.login-container-4HZX-.modal-container-fsYki > div.social-container-NE2xk > div:nth-child(2)')
+    await page.click('.e13wiwn62')
+
     await page.waitForSelector('.tiktok-1igqi6u-DivProfileContainer')
+    
     console.log('Wait for login...OK');
+
     await page.reload()
     const cookies = await page.cookies();
-    await fs.writeFile('./cookies.json', JSON.stringify(cookies, null, 2)); 
+    await fs.writeFileSync('./cookies.json', JSON.stringify(cookies, null, 2)); 
 }
 
 (async () => {
