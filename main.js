@@ -65,7 +65,6 @@ const comment = async (page) => {
 
   while (count < 50) {
     sleep(5000)
-    await comment(page)
     await page.waitForSelector('.tiktok-6hn0mp-SpanOtherInfos > span:nth-child(2)')
     const element = await page.$('.tiktok-6hn0mp-SpanOtherInfos > span:nth-child(2)')
     const text = await page.evaluate((element) => element.textContent, element)
