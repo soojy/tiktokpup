@@ -35,8 +35,8 @@ const login = async (page) => {
     const page = await browser.newPage();
     await page.setViewport({ width: 1366, height: 768});
     await page.goto('https://www.tiktok.com/');
+    await page.setDefaultTimeout(200000)
     await loadCookies(page)
     await page.screenshot({ path: 'screenshots/page.png' });
     setTimeout( async () => {await browser.close()},200000)
-  
 })();
