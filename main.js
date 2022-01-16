@@ -2,6 +2,7 @@ const puppeteer = require('puppeteer')
 const fs = require('fs')
 const { syncBuiltinESMExports } = require('module')
 let count = 0
+
 const loadCookies = async (page) => {
   if (fs.existsSync('cookies.json')) {
     console.log('Loading cookies...')
@@ -17,24 +18,30 @@ const loadCookies = async (page) => {
 }
 
 const commentWrap = async (page) => {
-    console.log('---COMMENTING---')
-    count = +1
-    console.log(`---COMMENTS COUNT - ${count} ---`)
-  }
-  function sleep(delay) {
-    var start = new Date().getTime();
-    while (new Date().getTime() < start + delay);
+  console.log('---COMMENTING---')
+  count = +1
+  console.log(`---COMMENTS COUNT - ${count} ---`)
 }
+
+const sleep = (delay) => {
+  var start = new Date().getTime()
+  while (new Date().getTime() < start + delay);
+}
+
 const comment = async (page) => {
   console.log('---COMMENTING---')
   await page.waitForSelector('.DraftEditor-root')
   await page.click('.DraftEditor-root')
   await page.keyboard.type('😍😍😍Hello, tell me, am i beautiful?😍😍')
-  await page.waitForSelector('.tiktok-1w3780e-DivPostButton', {clickable: true})
+  await page.waitForSelector('.tiktok-1w3780e-DivPostButton', { clickable: true })
   await page.click('.tiktok-1w3780e-DivPostButton')
   await page.waitForSelector('.css-1commy4-DivMessageContainer')
-  await page.click('div.tiktok-16r0vzi-DivCommentItemContainer:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(2) > div:nth-child(1)')
-  
+  sleep(500)
+  await page.waitForSelector('div.tiktok-16r0vzi-DivCommentItemContainer:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(2) > div:nth-child(1)')
+  await page.click(
+    'div.tiktok-16r0vzi-DivCommentItemContainer:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(2) > div:nth-child(1)'
+  )
+
   sleep(2000)
   count = +1
   console.log(`---COMMENTS COUNT - ${count} ---`)
@@ -68,7 +75,7 @@ const comment = async (page) => {
     await page.waitForSelector('.tiktok-6hn0mp-SpanOtherInfos > span:nth-child(2)')
     const element = await page.$('.tiktok-6hn0mp-SpanOtherInfos > span:nth-child(2)')
     const text = await page.evaluate((element) => element.textContent, element)
-    console.log(text);
+    console.log(text)
     if (text.indexOf('m') !== -1 || text.indexOf('now') !== -1) {
       if (text.indexOf('m') !== -1) {
         if (text.match(/\d+/)[0] <= 45) {
@@ -78,8 +85,10 @@ const comment = async (page) => {
         await comment(page)
       }
     }
-    
-    await page.waitForSelector('.tiktok-eeutzd-ButtonBasicButtonContainer-StyledVideoSwitchV2',{visible: true})
+
+    await page.waitForSelector('.tiktok-eeutzd-ButtonBasicButtonContainer-StyledVideoSwitchV2', {
+      visible: true,
+    })
     await page.click('.tiktok-eeutzd-ButtonBasicButtonContainer-StyledVideoSwitchV2')
   }
 
