@@ -27,6 +27,15 @@ const commentWrap = async (page) => {
 }
 const comment = async (page) => {
   console.log('---COMMENTING---')
+  await page.waitForSelector('.DraftEditor-root')
+  await page.click('.DraftEditor-root')
+  await page.keyboard.type('😍😍😍Hello, tell me, am i beautiful?😍😍')
+  await page.waitForSelector('.tiktok-1w3780e-DivPostButton', {clickable: true})
+  await page.click('.tiktok-1w3780e-DivPostButton')
+  await page.waitForSelector('.css-1commy4-DivMessageContainer')
+  await page.click('div.tiktok-16r0vzi-DivCommentItemContainer:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(2) > div:nth-child(1)')
+  
+  sleep(2000)
   count = +1
   console.log(`---COMMENTS COUNT - ${count} ---`)
 }
@@ -55,13 +64,14 @@ const comment = async (page) => {
   )
 
   while (count < 50) {
-      sleep(4000)
+    sleep(5000)
+    await comment(page)
     await page.waitForSelector('.tiktok-6hn0mp-SpanOtherInfos > span:nth-child(2)')
     const element = await page.$('.tiktok-6hn0mp-SpanOtherInfos > span:nth-child(2)')
     const text = await page.evaluate((element) => element.textContent, element)
     console.log(text);
-    if (text.indexOf('min') !== -1 || text.indexOf('now') !== -1) {
-      if (text.indexOf('min') !== -1) {
+    if (text.indexOf('m') !== -1 || text.indexOf('now') !== -1) {
+      if (text.indexOf('m') !== -1) {
         if (text.match(/\d+/)[0] <= 45) {
           await comment(page)
         }
