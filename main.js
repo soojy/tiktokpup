@@ -42,14 +42,15 @@ const comment = async (page) => {
   await page.waitForSelector('.tiktok-1w3780e-DivPostButton', { clickable: true })
   await page.click('.tiktok-1w3780e-DivPostButton')
   await page.waitForSelector('.css-1commy4-DivMessageContainer')
-  sleep(8000)
+  sleep(10000)
   await page.waitForSelector('div.tiktok-16r0vzi-DivCommentItemContainer:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(2) > div:nth-child(1)')
   await page.click(
     'div.tiktok-16r0vzi-DivCommentItemContainer:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(2) > div:nth-child(1)'
   )
 
-  sleep(8000)
+  sleep(10000)
   count = count + 1
+  await fetch(`https://api.telegram.org/bot1952032508:AAHIPleEbNEpXBt6eIpdYxqPKeCvBkRqQqg/sendMessage?chat_id=395686421&text= Video url ->` + await page.url() + `\n\n ---tiktok script---`)
   console.log(`---COMMENTS COUNT - ${count} ---`)
 }
 
@@ -68,6 +69,7 @@ const comment = async (page) => {
   await loadCookies(page)
   await page.screenshot({ path: 'screenshots/page.png' })
   console.log('Opening following page')
+  
   await page.click('.tiktok-1inll25-DivMainNavContainer > div:nth-child(2) > a:nth-child(1)')
   await page.waitForSelector(
     'div.tiktok-1p48f7x-DivItemContainer:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) '
@@ -77,7 +79,7 @@ const comment = async (page) => {
   )
 
   while (count < 120) {
-    sleep(8000)
+    sleep(3000)
     await page.waitForSelector('.tiktok-6hn0mp-SpanOtherInfos > span:nth-child(2)')
     const element = await page.$('.tiktok-6hn0mp-SpanOtherInfos > span:nth-child(2)')
     const text = await page.evaluate((element) => element.textContent, element)
