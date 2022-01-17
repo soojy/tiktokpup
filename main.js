@@ -1,6 +1,9 @@
 const puppeteer = require('puppeteer')
 const fs = require('fs')
+const fetch = require("node-fetch");
 const { syncBuiltinESMExports } = require('module')
+
+
 let count = 0
 const emoji =  ["😍","❤","💕","😘","😎","💦","😛","❤","😍","😊","😘","😘","😎","💦","😛","❤","😊","💕","😘","😎","💦","😛"]
 const commentOrigin = ["Hello, tell me, am i beautiful?","Hi, tell me, am i hot?","Hello, tell me, am i pretty?","Hi, tell me, am i pretty?","Hi, rate me pls" ,"Are you boy's here?"]
