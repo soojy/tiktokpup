@@ -38,19 +38,22 @@ const sleep = (delay) => {
 
 const comment = async (page) => {
   console.log('---COMMENTING---')
+  sleep(3000)
   await page.waitForSelector('.DraftEditor-root')
   await page.click('.DraftEditor-root')
-  await page.keyboard.type(await randomEmoji() + commentOrigin[Math.floor(Math.random() * commentOrigin.length)] + await randomEmoji())
+  await page.keyboard.type(await randomEmoji() + commentOrigin[Math.floor(Math.random() * commentOrigin.length)] + await randomEmoji(), { delay: 100 })
+  sleep(500)
   await page.waitForSelector('.tiktok-1w3780e-DivPostButton', { clickable: true })
+  sleep(200)
   await page.click('.tiktok-1w3780e-DivPostButton')
   await page.waitForSelector('.css-1commy4-DivMessageContainer')
-  sleep(10000)
+  sleep(3000)
   await page.waitForSelector('div.tiktok-16r0vzi-DivCommentItemContainer:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(2) > div:nth-child(1)')
   await page.click(
     'div.tiktok-16r0vzi-DivCommentItemContainer:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(2) > div:nth-child(1)'
   )
 
-  sleep(10000)
+  sleep(3000)
   count = count + 1
   await axios(`https://api.telegram.org/bot1952032508:AAHIPleEbNEpXBt6eIpdYxqPKeCvBkRqQqg/sendMessage?chat_id=395686421&text= Video url ->` + await page.url() + `\n\n ---tiktok script---`)
   console.log(`---COMMENTS COUNT - ${count} ---`)
