@@ -4,8 +4,8 @@ const { syncBuiltinESMExports } = require('module')
 const axios = require('axios')
 
 let count = 0
-const emoji =  ["😍","❤","💕","😘","😎","💦","😛","❤","😍","😊","😘","😘","😎","💦","😛","❤","😊","💕","😘","😎","💦","😛"]
-const commentOrigin = ["Hello, tell me, am i beautiful?","Hi, tell me, am i hot?","Hello, tell me, am i pretty?","Hi, tell me, am i pretty?","Hi, rate me pls" ,"Are you boy's here?"]
+const emoji =  ["✌","😂","😝","😁","😱","👉","🙌","🍻","🔥","🌈","☀","🎈","🌹","💄","🎀","⚽","🎾","🏁","😡","👿","🐻","🐶","🐬","🐟","🍀","👀","🚗","🍎","💝","💙","👌","❤","😍","😉","😓","😳","💪","💩","🍸","🔑","💖","🌟","🎉","🌺","🎶","👠","🏈","⚾","🏆","👽","💀","🐵","🐮","🐩","🐎","💣","👃","👂","🍓","💘","💜","👊","💋","😘","😜","😵","🙏","👋","🚽","💃","💎","🚀","🌙","🎁","⛄","🌊","⛵","🏀","🎱","💰","👶","👸","🐰","🐷","🐍","🐫","🔫","👄","🚲","🍉","💛","💚"]
+const commentOrigin = ["Hello, tell me, am i beautiful?", "Hi, tell me, am i hot?", "Hello, tell me, am i pretty?", "Hi, tell me, am i pretty?", "Hi, rate me pls.", "Are you boy's here?", "You think I'm the hottest?", "Hello, am I very beautiful?", "Hello, am I very hot?", "Hi, am I very hot?", "Hello, am I hot?", "Hi, am I hot?", "Hello, do boys like me?", "Hi, do boys like me?", "Hello, do boys like me?", "Hey boys do you like me?", "Hi boys do you like me?"]
 
 const loadCookies = async (page) => {
   if (fs.existsSync('cookies.json')) {
