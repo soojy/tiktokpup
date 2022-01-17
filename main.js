@@ -42,13 +42,13 @@ const comment = async (page) => {
   await page.waitForSelector('.tiktok-1w3780e-DivPostButton', { clickable: true })
   await page.click('.tiktok-1w3780e-DivPostButton')
   await page.waitForSelector('.css-1commy4-DivMessageContainer')
-  sleep(6000)
+  sleep(8000)
   await page.waitForSelector('div.tiktok-16r0vzi-DivCommentItemContainer:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(2) > div:nth-child(1)')
   await page.click(
     'div.tiktok-16r0vzi-DivCommentItemContainer:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(2) > div:nth-child(1)'
   )
 
-  sleep(6000)
+  sleep(8000)
   count = count + 1
   console.log(`---COMMENTS COUNT - ${count} ---`)
 }
