@@ -216,7 +216,6 @@ const comment = async (page) => {
       text.indexOf('K') !== -1 ||
       text.indexOf('M') !== -1
     ) {
-      await comment(page)
     } else {
       if (text < 88) {
         await comment(page)
