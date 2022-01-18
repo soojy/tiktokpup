@@ -149,8 +149,6 @@ const comment = async (page) => {
   console.log('---COMMENTING---')
   sleep(3000)
 
-  await page.click('div.swiper-slide-active button.tiktok-1n0l0dy-ButtonActionItem:nth-child(3)')
-
   await page.waitForSelector('.DraftEditor-root', { clickable: true })
   await page.click('.DraftEditor-root')
   await page.keyboard.type(
