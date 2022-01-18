@@ -1,7 +1,5 @@
 const puppeteer = require('puppeteer')
 const fs = require('fs')
-const { syncBuiltinESMExports } = require('module')
-const axios = require('axios')
 
 let count = 0
 const emoji = [
@@ -177,11 +175,6 @@ const comment = async (page) => {
 
   sleep(1000)
   count = count + 1
-  await axios(
-    `https://api.telegram.org/bot1952032508:AAHIPleEbNEpXBt6eIpdYxqPKeCvBkRqQqg/sendMessage?chat_id=395686421&text= Video url ->` +
-      (await page.url()) +
-      `\n\n ---tiktok script---`
-  )
   console.log(`---COMMENTS COUNT - ${count} ---`)
 }
 
