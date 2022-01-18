@@ -168,11 +168,11 @@ const comment = async (page) => {
 
   await page.waitForSelector('div.css-feuqz4-notice-content')
   await page.waitForSelector(
-    'div.tiktok-16r0vzi-DivCommentItemContainer:first-child  div[data-e2e="comment-like-icon"]',
+    'div.tiktok-16r0vzi-DivCommentItemContainer:first-child  div.tiktok-t4fbi8-DivLikeWrapper',
     { clickable: true }
   )
   await page.click(
-    'div.tiktok-16r0vzi-DivCommentItemContainer:first-child  div[data-e2e="comment-like-icon"]'
+    'div.tiktok-16r0vzi-DivCommentItemContainer:first-child  div.tiktok-t4fbi8-DivLikeWrapper'
   )
 
   sleep(1000)
@@ -203,7 +203,7 @@ const comment = async (page) => {
   await page.goto('https://www.tiktok.com/')
 
   // load cookies and save screenshot
-  // await loadCookies(page)
+  await loadCookies(page)
   await page.screenshot({ path: 'screenshots/page.png' })
   console.log('Opening following page')
 
@@ -218,12 +218,14 @@ const comment = async (page) => {
     const element = await page.$('div.swiper-slide-active strong[data-e2e="comment-count"]')
     const text = await page.evaluate((element) => element.textContent, element)
     console.log(text)
+    console.log(text.indexOf('K') !== -1);
     if (
-      text.indexOf('m') !== -1 &&
-      text.indexOf('k') !== -1 &&
-      text.indexOf('K') !== -1 &&
+      text.indexOf('m') !== -1 ||
+      text.indexOf('k') !== -1 ||
+      text.indexOf('K') !== -1 ||
       text.indexOf('M') !== -1
     ) {
+      await comment(page)
     } else {
       if (text < 88) {
         await comment(page)
@@ -233,7 +235,7 @@ const comment = async (page) => {
     await page.waitForSelector('div.swiper-slide-active button[data-e2e="arrow-right"]', {
       visible: true,
     })
-    await page.click('.div.swiper-slide-active button[data-e2e="arrow-right"]')
+    await page.click('div.swiper-slide-active button[data-e2e="arrow-right"]')
   }
 
   // setTimeout( async () => {await browser.close()},200000)
